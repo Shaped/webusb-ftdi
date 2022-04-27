@@ -52,6 +52,7 @@ This is just some basic usage. This driver is `alpha` quality; thus the API is s
     } catch (e) {
         // called if can't get a port
         console.warn("Error connecting to port: " + e.error)
+        console.warn(e)
     }
     
 
