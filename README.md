@@ -21,7 +21,7 @@ This is just some basic usage. This driver is `alpha` quality; thus the API is s
     var device = new WebUSBSerialDevice({
         overridePortSettings: false,
         // these are the defaults, this config is only used if above is true
-        baud: 9600,
+        baudrate: 9600,
         bits: 8,
         stop: 1,
         parity: false
