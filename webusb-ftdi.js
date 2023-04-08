@@ -601,8 +601,9 @@ class WebUSBSerialPort {
 	 *
 	 */
 
-	constructor(device) {
+	constructor(device, portConfiguration) {
 		this.device = device;
+		this.portConfiguration = portConfiguration;
 
 		this.interfaceNumber = 0;
 		this.endpointIn = 0;
@@ -682,7 +683,7 @@ class WebUSBSerialPort {
 		    .then(() => this.device.selectAlternateInterface(this.interfaceNumber, 0))
 		    .then(() => {
 
-		    	let baud = 921600;
+		    	let baud = this.portConfiguration.baudrate;
 
 /*		    	console.log("controlTransfer out now for " + this.interfaceNumber)
 		    	console.log("req: " + this.#FTDI_SIO_SET_BAUD_RATE)
@@ -866,7 +867,7 @@ class WebUSBSerialDevice {
 			if (!(device in this.devices))
 				this.devices.push(device);
 
-			return new WebUSBSerialPort(device);
+			return new WebUSBSerialPort(device, this.configuration);
 		} catch (e) {
 			throw new Error(e);
 		}

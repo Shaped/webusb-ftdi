@@ -19,12 +19,16 @@ This is just some basic usage. This driver is `alpha` quality; thus the API is s
 
     // get a device object
     var device = new WebUSBSerialDevice({
-        overridePortSettings: false,
+        overridePortSettings: true, // TODO: not supported yet, always overrides baudrate
         // these are the defaults, this config is only used if above is true
-        baud: 9600,
-        bits: 8,
-        stop: 1,
-        parity: false
+        baudrate: 9600,
+        bits: 8, // TODO: override not supported yet
+        stop: 1, // TODO: override not supported yet
+        parity: false, // TODO: override not supported yet
+        deviceFilters : [
+	    // example filtered device; see code for more examples
+            { 'vendorId': 0x0403, 'productId': 0x6001}, // 0403:6001 Future Technology Devices International, Ltd FT232 Serial (UART) IC
+        ]
     });
     
     // get available ports (ftdi devices)
@@ -48,7 +52,8 @@ This is just some basic usage. This driver is `alpha` quality; thus the API is s
         });
     } catch (e) {
         // called if can't get a port
-        console.warn("Error connecting to port: " + e.error
+        console.warn("Error connecting to port: " + e.error)
+        console.warn(e)
     }
     
 
